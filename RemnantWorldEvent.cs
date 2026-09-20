@@ -106,7 +106,7 @@ namespace RemnantSaveManager
                     if (currentSublocation != null)
                     {
                         //Some world bosses don't have a preceding dungeon; subsequent items therefore spawn in the overworld
-                        if (currentSublocation.Equals("TheRavager'sHaunt") || currentSublocation.Equals("TheTempestCourt")) currentSublocation = null;
+                        if (currentSublocation.Equals("TheRavager'sHaunt") || currentSublocation.Equals("Убежище Разорителя") || currentSublocation.Equals("The Tempest Court") || currentSublocation.Equals("Грозовые тоннели") || currentSublocation.Equals("The Fetid glade") || currentSublocation.Equals("Хибара Мясника") || currentSublocation.Equals("Merchant dungeon") || currentSublocation.Equals("Корневой Ужас")) currentSublocation = null;
                     }
                     zone = getZone(textLine);
                     
@@ -129,9 +129,9 @@ namespace RemnantSaveManager
                     else if (textLine.Contains("Quest_Church"))
                     {
                         //process Root Mother event
-                        currentMainLocation = "Chapel Station";
+                        currentMainLocation = "Станция у церкви";
                         eventName = "RootMother";
-                        currentSublocation = "Church of the Harbinger";
+                        currentSublocation = "Церковь предвестника";
                     }
                     else if (eventType != null)
                     {
@@ -152,11 +152,11 @@ namespace RemnantSaveManager
                                 currentSublocation = null;
                             }
                         }
-                        if ("Chapel Station".Equals(currentMainLocation))
+                        if ("Станция у церкви".Equals(currentMainLocation))
                         {
                             if (textLine.Contains("Quest_Boss"))
                             {
-                                currentMainLocation = "Westcourt";
+                                currentMainLocation = "Уэсткорт";
                             } else
                             {
                                 currentSublocation = null;
@@ -180,6 +180,14 @@ namespace RemnantSaveManager
                                 se.Name = eventName;
                             }
                             se.Name = Regex.Replace(se.Name, "([a-z])([A-Z])", "$1 $2");
+                            if (se.Name == "Simulacrum")
+                            {
+                                se.Name = "Симулякр";
+                            }
+                            else if (se.Name == "Trait Book")
+                            {
+                                se.Name = "Фолиант знаний";
+                            }
                         }
 
                         if (zone != null && eventType != null && eventName != null)
@@ -203,7 +211,7 @@ namespace RemnantSaveManager
                                 se.Location = string.Join(": ", locationList);
                                 se.Type = eventType;
                                 se.setMissingItems(character);
-                                if (!"Chapel Station".Equals(currentMainLocation)) {
+                                if (!"Станция у церкви".Equals(currentMainLocation)) {
                                     zoneEvents[zone].Add(se);
                                 }
                                 else
@@ -215,10 +223,10 @@ namespace RemnantSaveManager
                                 if (eventName.Equals("Cryptolith") && zone.Equals("Rhom"))
                                 {
                                     RemnantWorldEvent ringdrop = new RemnantWorldEvent();
-                                    ringdrop.Location = zone;
+                                    ringdrop.Location = "Ром";
                                     ringdrop.setKey("SoulLink");
-                                    ringdrop.Name = "Soul Link";
-                                    ringdrop.Type = "Item Drop";
+                                    ringdrop.Name = "Связь душ";
+                                    ringdrop.Type = "Предмет";
                                     ringdrop.setMissingItems(character);
                                     zoneEvents[zone].Add(ringdrop);
                                 }
@@ -228,8 +236,8 @@ namespace RemnantSaveManager
                                     RemnantWorldEvent beetle = new RemnantWorldEvent();
                                     beetle.Location = se.Location;
                                     beetle.setKey("Sketterling");
-                                    beetle.Name = "Sketterling";
-                                    beetle.Type = "Loot Beetle";
+                                    beetle.Name = "Скарабей";
+                                    beetle.Type = "Жук с добычей";
                                     beetle.setMissingItems(character);
                                     zoneEvents[zone].Add(beetle);
                                 }
@@ -237,9 +245,9 @@ namespace RemnantSaveManager
                                 {
                                     RemnantWorldEvent wardPrime = new RemnantWorldEvent();
                                     wardPrime.setKey("WardPrime");
-                                    wardPrime.Name = "Ward Prime";
-                                    wardPrime.Location = "Earth: Ward Prime";
-                                    wardPrime.Type = "Quest Event";
+                                    wardPrime.Name = "Исходный Блок";
+                                    wardPrime.Location = "Земля: Исходный Блок";
+                                    wardPrime.Type = "Первый Блок";
                                     wardPrime.setMissingItems(character);
                                     zoneEvents[zone].Add(wardPrime);
                                 }
@@ -270,48 +278,48 @@ namespace RemnantSaveManager
             if (mode == ProcessMode.Campaign)
             {
                 ward13.setKey("Ward13");
-                ward13.Name = "Ward 13";
-                ward13.Location = "Earth: Ward 13";
-                ward13.Type = "Home";
+                ward13.Name = "Блок 13";
+                ward13.Location = "Земля: Блок 13";
+                ward13.Type = "";
                 ward13.setMissingItems(character);
                 if (ward13.MissingItems.Length > 0) orderedEvents.Add(ward13);
 
                 hideout.setKey("FoundersHideout");
-                hideout.Name = "Founder's Hideout";
-                hideout.Location = "Earth: Fairview";
-                hideout.Type = "Point of Interest";
+                hideout.Name = "Убежище Основателя";
+                hideout.Location = "Земля: Фэрвью";
+                hideout.Type = "";
                 hideout.setMissingItems(character);
                 if (hideout.MissingItems.Length > 0) orderedEvents.Add(hideout);
 
                 undying.setKey("UndyingKing");
-                undying.Name = "Undying King";
-                undying.Location = "Rhom: Undying Throne";
-                undying.Type = "World Boss";
+                undying.Name = "Эзлан, Бессмертный Король";
+                undying.Location = "Ром: Престол бессмертия";
+                undying.Type = "Ключевой Босс";
                 undying.setMissingItems(character);
 
-                queen.Name = "Iskal Queen";
+                queen.Name = "Королева Искал";
                 queen.setKey("IskalQueen");
-                queen.Location = "Corsus: The Mist Fen";
-                queen.Type = "Point of Interest";
+                queen.Location = "Корсус: Туманное болото";
+                queen.Type = "Зона отдыха";
                 queen.setMissingItems(character);
 
-                navun.Name = "Fight With The Rebels";
+                navun.Name = "Восстание повстанцев";
                 navun.setKey("SlaveRevolt");
-                navun.Location = "Yaesha: Shrine of the Immortals";
-                navun.Type = "Siege";
+                navun.Location = "Йаэша: Храм бессмертных";
+                navun.Type = "Осада";
                 navun.setMissingItems(character);
 
                 ward17.setKey("Ward17");
-                ward17.Name = "The Dreamer";
-                ward17.Location = "Earth: Ward 17";
-                ward17.Type = "World Boss";
+                ward17.Name = "Спящий";
+                ward17.Location = "Земля: Блок 17";
+                ward17.Type = "Финальный Босс";
                 ward17.setMissingItems(character);
             }
 
             for (int i = 0; i < zoneEvents["Earth"].Count; i++)
             {
                 //if (mode == ProcessMode.Subject2923) Console.WriteLine(zoneEvents["Earth"][i].eventKey);
-                if (mode == ProcessMode.Campaign && !churchAdded && zoneEvents["Earth"][i].Location.Contains("Westcourt"))
+                if (mode == ProcessMode.Campaign && !churchAdded && zoneEvents["Earth"][i].Location.Contains("Уэсткорт"))
                 {
                     foreach (RemnantWorldEvent rwe in churchEvents)
                     {
@@ -325,21 +333,21 @@ namespace RemnantSaveManager
             {
                 orderedEvents.Add(zoneEvents["Rhom"][i]);
             }
-            if (mode == ProcessMode.Campaign && undying.MissingItems.Length > 0) orderedEvents.Add(undying);
+            if (mode == ProcessMode.Campaign) orderedEvents.Add(undying);
             for (int i = 0; i < zoneEvents["Corsus"].Count; i++)
             {
-                if (mode == ProcessMode.Campaign && !queenAdded && zoneEvents["Corsus"][i].Location.Contains("The Mist Fen"))
+                if (mode == ProcessMode.Campaign && !queenAdded && zoneEvents["Corsus"][i].Location.Contains("Туманное болото"))
                 {
-                    if (queen.MissingItems.Length > 0) orderedEvents.Add(queen);
+                    orderedEvents.Add(queen);
                     queenAdded = true;
                 }
                 orderedEvents.Add(zoneEvents["Corsus"][i]);
             }
             for (int i = 0; i < zoneEvents["Yaesha"].Count; i++)
             {
-                if (mode == ProcessMode.Campaign && !navunAdded && zoneEvents["Yaesha"][i].Location.Contains("The Scalding Glade"))
+                if (mode == ProcessMode.Campaign && !navunAdded && zoneEvents["Yaesha"][i].Location.Contains("Выжженная поляна"))
                 {
-                    if (navun.MissingItems.Length > 0) orderedEvents.Add(navun);
+                    orderedEvents.Add(navun);
                     navunAdded = true;
                 }
                 orderedEvents.Add(zoneEvents["Yaesha"][i]);
@@ -356,7 +364,7 @@ namespace RemnantSaveManager
 
             if (mode == ProcessMode.Campaign)
             {
-                if (ward17.MissingItems.Length > 0) orderedEvents.Add(ward17);
+             orderedEvents.Add(ward17);
             }
 
             for (int i = 0; i < orderedEvents.Count; i++)
@@ -374,9 +382,9 @@ namespace RemnantSaveManager
             if (mode == ProcessMode.Subject2923)
             {
                 ward17.setKey("Ward17Root");
-                ward17.Name = "Harsgaard";
-                ward17.Location = "Earth: Ward 17 (Root Dimension)";
-                ward17.Type = "World Boss";
+                ward17.Name = "Харсгаард";
+                ward17.Location = "Земля: Исходный Блок";
+                ward17.Type = "Финальный Босс";
                 ward17.setMissingItems(character);
                 character.CampaignEvents.Add(ward17);
             }
@@ -413,38 +421,38 @@ namespace RemnantSaveManager
             string eventType = null;
             if (textLine.Contains("SmallD"))
             {
-                eventType = "Side Dungeon";
+                eventType = "Событие";
             }
             else if (textLine.Contains("Quest_Boss"))
             {
-                eventType = "World Boss";
+                eventType = "Мировой Босс";
             }
             else if (textLine.Contains("Siege")|| textLine.Contains("Quest_Church"))
             {
-                eventType = "Siege";
+                eventType = "Осада";
             }
             else if (textLine.Contains("Mini"))
             {
-                eventType = "Miniboss";
+                eventType = "Мини-Босс";
             }
             else if (textLine.Contains("Quest_Event"))
             {
                 if (textLine.Contains("Nexus"))
                 {
-                    eventType = "Siege";
+                    eventType = "Узел Корня";
                 }
                 else if (textLine.Contains("Sketterling"))
                 {
-                    eventType = "Loot Beetle";
+                    eventType = "Жук с добычей";
                 }
                 else
                 {
-                    eventType = "Item Drop";
+                    eventType = "Предмет";
                 }
             }
             else if (textLine.Contains("OverworldPOI") || textLine.Contains("OverWorldPOI") || textLine.Contains("OverworlPOI"))
             {
-                eventType = "Point of Interest";
+                eventType = "Зона отдыха";
             }
             return eventType;
         }

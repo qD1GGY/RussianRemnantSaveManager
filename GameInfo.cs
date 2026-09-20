@@ -271,7 +271,7 @@ namespace RemnantSaveManager
         {
             this.LocalVersion = 0;
             this.RemoteVersion = 0;
-            this.Message = "No new game info found.";
+            this.Message = "Новых данных об игре не найдено.";
             this.Result = GameInfoUpdateResult.NoUpdate;
         }
     }

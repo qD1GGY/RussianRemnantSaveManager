@@ -75,21 +75,21 @@ namespace RemnantSaveManager
             lblCredits.FontSize = sliderSize.Value;
             initialized = true;
             TreeViewItem nodeNormal = new TreeViewItem();
-            nodeNormal.Header = "Normal";
+            nodeNormal.Header = "Основное";
             nodeNormal.Foreground = treeMissingItems.Foreground;
             nodeNormal.IsExpanded = Properties.Settings.Default.NormalExpanded;
             nodeNormal.Expanded += GameType_CollapsedExpanded;
             nodeNormal.Collapsed += GameType_CollapsedExpanded;
             nodeNormal.Tag = "mode";
             TreeViewItem nodeHardcore = new TreeViewItem();
-            nodeHardcore.Header = "Hardcore";
+            nodeHardcore.Header = "Героический режим";
             nodeHardcore.Foreground = treeMissingItems.Foreground;
             nodeHardcore.IsExpanded = Properties.Settings.Default.HardcoreExpanded;
             nodeHardcore.Expanded += GameType_CollapsedExpanded;
             nodeHardcore.Collapsed += GameType_CollapsedExpanded;
             nodeHardcore.Tag = "mode";
             TreeViewItem nodeSurvival = new TreeViewItem();
-            nodeSurvival.Header = "Survival";
+            nodeSurvival.Header = "Режим Выживания";
             nodeSurvival.Foreground = treeMissingItems.Foreground;
             nodeSurvival.IsExpanded = Properties.Settings.Default.SurvivalExpanded;
             nodeSurvival.Expanded += GameType_CollapsedExpanded;
@@ -230,11 +230,14 @@ namespace RemnantSaveManager
             e.Column.CellStyle.Setters.Add(new Setter(DataGridCell.PaddingProperty, new Thickness(4)));
             //e.Column.CellStyle.Setters.Add(new Setter(DataGridCell.BorderBrushProperty, new SolidColorBrush(borderColor)));
             //e.Column.CellStyle.Setters.Add(new Setter(DataGridCell.BorderThicknessProperty, new Thickness(1)));
+            if (e.Column.Header.Equals("Location")) e.Column.Header = "Локация";
+            if (e.Column.Header.Equals("Type")) e.Column.Header = "Тип";
+            if (e.Column.Header.Equals("Name")) e.Column.Header = "Название";
             if (e.Column.Header.Equals("MissingItems"))
             {
-                e.Column.Header = "Missing Items";
+                e.Column.Header = "Отсутствующие предметы";
                 e.Column.CellStyle.Setters.Add(new Setter(DataGridCell.FontSizeProperty, ((fontSize / 3) * 2)));
-                if (Properties.Settings.Default.MissingItemColor.Equals("Red"))
+                if (Properties.Settings.Default.MissingItemColor.Equals("Красный"))
                 {
                     e.Column.CellStyle.Setters.Add(new Setter(DataGridCell.ForegroundProperty, new SolidColorBrush(Colors.Red)));
                 } else
@@ -248,9 +251,9 @@ namespace RemnantSaveManager
                     e.Cancel = true;
                     return;
                 }
-                e.Column.Header = "All Items";
+                e.Column.Header = "Все предметы";
                 e.Column.CellStyle.Setters.Add(new Setter(DataGridCell.FontSizeProperty, ((fontSize / 3) * 2)));
-                if (Properties.Settings.Default.MissingItemColor.Equals("Red"))
+                if (Properties.Settings.Default.MissingItemColor.Equals("Красный"))
                 {
                     e.Column.CellStyle.Setters.Add(new Setter(DataGridCell.ForegroundProperty, new SolidColorBrush(Colors.Red)));
                 }
@@ -477,7 +480,7 @@ namespace RemnantSaveManager
                     throw new Exception("Tab does not exist");
             }
 
-            MessageBox.Show("Content copied.");
+            MessageBox.Show("Содержимое скопировано.");
         }
 
         private string GetTreeItem(TreeViewItem item)
@@ -505,14 +508,25 @@ namespace RemnantSaveManager
             MenuItem mnu = sender as MenuItem;
             TreeViewItem treeItem = ((ContextMenu)mnu?.Parent)?.PlacementTarget as TreeViewItem;
             var type = ((TreeViewItem)treeItem?.Parent)?.Header.ToString();
-            var itemname = treeItem?.Header.ToString();
+            var itemName = treeItem?.Header.ToString();
 
-            if (type == "Armor")
+            if (string.IsNullOrEmpty(itemName)) return;
+
+            // Очищаем название от лишних приписок в скобках (например, характеристики или уровень)
+            string searchName = itemName;
+            int bracket = searchName.IndexOf("(");
+            if (bracket > 0)
             {
-                itemname = itemname.Substring(0, itemname.IndexOf("(")) + "Set";
+                searchName = searchName.Substring(0, bracket).Trim();
             }
 
-            System.Diagnostics.Process.Start($"https://remnantfromtheashes.wiki.fextralife.com/{itemname}");
+            // Заменяем пробелы на плюсы для URL
+            searchName = searchName.Replace(" ", "+");
+
+            // Отправляем запрос в Google. Он сам сопоставит русское название (например, "Кровная связь") 
+            // с английской статьей на Fextralife ("Blood Bond") и выдаст её на первом месте.
+            string url = $"https://www.google.com/search?q=Remnant+From+the+Ashes+{searchName}+wiki";
+            System.Diagnostics.Process.Start(url);
         }
     }
 }

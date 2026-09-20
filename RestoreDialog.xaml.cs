@@ -14,7 +14,7 @@ namespace RemnantSaveManager
         public RestoreDialog(MainWindow @mw, SaveBackup @sb, RemnantSave @as)
         {
             InitializeComponent();
-            this.txtSave.Content = $"Save Name:\t{sb.Name}\nSave Date:\t{sb.SaveDate.ToString(CultureInfo.CurrentCulture)}";
+            this.txtSave.Content = $"Название:\t{sb.Name}\nДата:\t\t{sb.SaveDate.ToString(CultureInfo.CurrentCulture)}";
             this._saveBackup = sb;
             this._activeSave = @as;
         }

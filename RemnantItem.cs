@@ -31,12 +31,12 @@ namespace RemnantSaveManager
                     itemName = itemKey.Substring(itemKey.LastIndexOf('/') + 1);
                     if (itemKey.Contains("/Weapons/"))
                     {
-                        itemType = "Weapon";
+                        itemType = "Оружие";
                         if (itemName.Contains("Mod_")) itemName = itemName.Replace("/Weapons/", "/Mods/");
                     }
                     if (itemKey.Contains("/Armor/") || itemKey.Contains("TwistedMask"))
                     {
-                        itemType = "Armor";
+                        itemType = "Броня";
                         if (itemKey.Contains("TwistedMask"))
                         {
                             itemName = "TwistedMask (Head)";
@@ -47,10 +47,10 @@ namespace RemnantSaveManager
                             itemName = parts[2] + " (" + parts[1] + ")";
                         }
                     }
-                    if (itemKey.Contains("/Trinkets/") || itemKey.Contains("BrabusPocketWatch")) itemType = "Trinket";
-                    if (itemKey.Contains("/Mods/")) itemType = "Mod";
-                    if (itemKey.Contains("/Traits/")) itemType = "Trait";
-                    if (itemKey.Contains("/Emotes/")) itemType = "Emote";
+                    if (itemKey.Contains("/Trinkets/") || itemKey.Contains("BrabusPocketWatch")) itemType = "Бижутерия";
+                    if (itemKey.Contains("/Mods/")) itemType = "Модификатор";
+                    if (itemKey.Contains("/Traits/")) itemType = "Талант";
+                    if (itemKey.Contains("/Emotes/")) itemType = "Эмоция";
 
                     itemName = itemName.Replace("Weapon_", "").Replace("Root_", "").Replace("Wasteland_", "").Replace("Swamp_", "").Replace("Pan_", "").Replace("Atoll_", "").Replace("Mod_", "").Replace("Trinket_", "").Replace("Trait_", "").Replace("Quest_", "").Replace("Emote_", "").Replace("Rural_", "").Replace("Snow_", "");
                     if (!itemType.Equals("Armor"))
