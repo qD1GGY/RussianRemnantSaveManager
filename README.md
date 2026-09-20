@@ -5,7 +5,7 @@ Remnant Save Manager позволяет легко создавать резер
 
 Вы также можете проанализировать мир, чтобы увидеть, какие события выпали для вашей кампании или режима приключения.
 
-Скачайте последнюю версию .exe со [Страницы релизов](https://github.com/qD1GGY/RussianRemnantSaveManager/releases).
+Скачайте последнюю версию файла со [Страницы релизов](https://github.com/qD1GGY/RussianRemnantSaveManager/releases).
 
 Требуется [.NET Framework 4.7.2 Runtime](https://dotnet.microsoft.com/download/dotnet-framework/net472).
 
