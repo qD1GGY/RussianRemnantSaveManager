@@ -1,6 +1,6 @@
 # Remnant Save Manager
 
-Руководство по использованию [Менеджера сохраненй & Аналзитора мира](https://steamcommunity.com/sharedfiles/filedetails/?id=3750856611).
+Руководство по использованию: [Менеджер сохранений & Анализатор мира](https://steamcommunity.com/sharedfiles/filedetails/?id=3750856611).
 
 Скачайте последнюю версию .zip-файла со [Страницы релизов](https://github.com/qD1GGY/RussianRemnantSaveManager/releases).
 
