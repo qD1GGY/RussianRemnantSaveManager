@@ -1,9 +1,7 @@
 # Remnant Save Manager
 **Примечание: Если вы ищете аналогичный инструмент для Remnant 2, ознакомьтесь с [Remnant Save Guardian](https://github.com/Razzmatazzz/RemnantSaveGuardian).**
 
-Remnant Save Manager позволяет легко создавать резервные копии и восстанавливать файлы сохранений Remnant: From the Ashes. Он также может отслеживать изменения в вашем файле сохранений Remnant и автоматически создавать резервные копии.
-
-Вы также можете проанализировать мир, чтобы посмотреть, какие события, боссы и предметы сгенерировались в режимах кампании или приключения.
+Руководство по использованию [Менеджера сохраненй & Аналзитора мира](https://steamcommunity.com/sharedfiles/filedetails/?id=3750856611).
 
 Скачайте последнюю версию .zip-файла со [Страницы релизов](https://github.com/qD1GGY/RussianRemnantSaveManager/releases).
 
