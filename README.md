@@ -1,5 +1,4 @@
 # Remnant Save Manager
-**Примечание: Если вы ищете аналогичный инструмент для Remnant 2, ознакомьтесь с [Remnant Save Guardian](https://github.com/Razzmatazzz/RemnantSaveGuardian).**
 
 Руководство по использованию [Менеджера сохраненй & Аналзитора мира](https://steamcommunity.com/sharedfiles/filedetails/?id=3750856611).
 
