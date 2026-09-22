@@ -10,3 +10,5 @@ Remnant Save Manager позволяет легко создавать резер
 Требуется [.NET Framework 4.7.2 Runtime](https://dotnet.microsoft.com/download/dotnet-framework/net472).
 
 Благодарность hzla за [Оригинальный онлайн-анализатор мира](https://hzla.github.io/Remnant-World-Analyzer/).
+
+Благодарность Razzmatazzz за [Оригинальную утилиту](https://github.com/Razzmatazzz/RemnantSaveManager).
